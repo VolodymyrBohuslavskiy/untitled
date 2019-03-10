@@ -1,38 +1,88 @@
+
+<form
+  #depForm="ngForm"
+  (ngSubmit)="senddepForm(depForm)">
+  <input
+    placeholder="ADD departanent"
+    type="text"
+    name="dpName"
+    ngModel>
+  <input
+    type="submit"
+    value="ADD departanent">
 <div>
-  <form #addForm="ngForm" (ngSubmit)="sendAddForm(addForm)">
-
-    <input placeholder="empName"
-           type="text"
-           name="empName"
-           ngModel>
+  <form
+    #addForm="ngForm"
+    (ngSubmit)="sendAddForm(addForm)"
+  >
+    <input
+      placeholder="empName"
+      type="text"
+      name="empName"
+      ngModel>
     empActive
-    <input type="checkbox"
-           name="empActive"
-           ngModel>
-    <select name="department" ngModel>
-      <option *ngFor="let d of departamens" value="{{d.dpID}}">{{d.dpName}}</option>
-    </select>
-    <input type="submit" value="Save">
-    <button (click)="addForm.resetForm()">Cancel</button>
-  </form>
+    <input
+      type="checkbox"
+      name="empActive"
+      ngModel>
 
+    <select
+      ngModel
+      name="department">
+      <option
+        *ngFor="let d of departamens"
+        [ngValue]="d"
+      >{{d.dpName}}
+      </option>
+    </select>
+
+    <input
+      type="submit"
+      value="Save">
+    <button
+      (click)="addForm.resetForm()"
+    >Cancel
+    </button>
+  </form>
 
 </div>
 <div *ngFor="let e of employees">
   <button (click)="col(e)">View</button>
   <button (click)="col(e)">Edit</button>
-  <a>  {{e.empID}}  </a>
-  <a>{{e.empName}}  </a>
-  <a>{{e.empActive}}  </a>
-  <a>{{e.department.dpName}}  </a>
-  <button (click)="deleteThisEmpl(e.empID)">Delete</button>
+
+  <a>{{e.empID}}</a>
+  <a>{{e.empName}}</a>
+  <a>{{e.empActive}}</a>
+  <!--<a>{{e.department.dpName}}</a>-->
+
+  <button
+    (click)="deleteThisEmpl(e)">
+    Delete
+  </button>
 </div>
 
-<form #surchForm="ngForm" (ngSubmit)="sendsurchForm(surchForm)">
-  <input placeholder="empName"
-           type="text"
-           name="empName"
-  ngModel>
-  <input type="submit" value="Send">
-  <button (click)="surchForm.resetForm()">Cancel</button>
+<form
+  #surchForm="ngForm"
+  (ngSubmit)="sendsurchForm(surchForm)">
+  <input
+    placeholder="empName"
+    type="text"
+    name="empName"
+    ngModel>
+  <input
+    type="submit"
+    value="Send">
+  <button
+    (click)="surchForm.resetForm()">
+    Cancel
+  </button>
 </form>
+
+<div *ngFor="let e of employeeswithName">
+  <a>ID:{{e.empID}}  </a>
+  <a>empName: {{e.empName}}  </a>
+  <a>empActive:  {{e.empActive}}  </a>
+  <!--<a>department: {{e.department.dpName}}</a>-->
+</div>
+
+

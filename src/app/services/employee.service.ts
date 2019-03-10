@@ -17,18 +17,21 @@ export class EmployeeService {
     return this.http.get<Employee[]>('http://localhost:8080/sowallempl');
   }
 
-  delete(id: number) {
-    return this.http.delete('http://localhost:8080/delete-empl' + id).subscribe();
+  sendSursh(surchForm: NgForm): Observable<Employee[]> {
+    return this.http.get<Employee[]>('http://localhost:8080/findbyname-' + surchForm.value.empName);
+  }
+
+  delete(empl: Employee) {
+    return this.http.delete('http://localhost:8080/delete-empl' + empl.empID).subscribe();
   }
 
   sendForm(addForm: NgForm) {
-    const emppl = {
-      empID: addForm.value.empID,
+    return this.http.post('http://localhost:8080/add-employee', JSON.stringify({
       empName: addForm.value.empName,
       empActive: addForm.value.empActive,
       department: addForm.value.department
-    };
-    return this.http.post('http://localhost:8080/add-employee', emppl).subscribe();
+    })).subscribe();
   }
+
 
 }
